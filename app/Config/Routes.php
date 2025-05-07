@@ -15,7 +15,8 @@ $routes->post('/loginProcess', 'login::loginProcess');
 $routes->get('/logout', 'login::logout');
 
 // profil
-$routes->get('/profil/(:any)', 'profilController::index/$1');
+$routes->get('/profil', 'ProfilController::show');
+$routes->post('/profil', 'profilController::index');
 $routes->post('/profil/saveData/(:num)', 'profilController::save/$1');
 
 
@@ -59,6 +60,9 @@ $routes->group('/', ['filter' => 'user'], function($routes){
     $routes->get('', 'Home::index');
     $routes->get('/detail/(:any)', 'Home::detail/$1');
     $routes->post('/rating/(:any)', 'Home::rating/$1');
+
+    $routes->post('/favorit/(:num)', 'FavoritController::tambahFavorit/$1');
+    $routes->delete('/favorit/hapus/(:num)', 'FavoritController::hapusFavorit/$1');
 
     // fitur pencarian
     // $routes->get('/search', 'SearchController::index');

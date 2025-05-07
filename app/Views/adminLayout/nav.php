@@ -21,9 +21,12 @@
             <img alt="image" src="/foto_siswa/<?= $userLogin['foto_siswa'] ?>" class="rounded-circle mr-1">
             <div class="d-sm-none d-lg-inline-block">My <?= $userLogin['nama_user'] ?></div></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <a href="/profil/<?= $userLogin['id_user'] ?>" class="dropdown-item has-icon">
-                <i class="far fa-user"></i> Profile
-              </a>
+            
+            <form action="/profil" method="post">
+                  <?= csrf_field() ?>
+                  <button type="submit"><i class="far fa-user"></i> Profile</button>
+              </form>
+
               <div class="dropdown-divider"></div>
               <a href="/logout" class="dropdown-item has-icon text-danger">
                 <i class="fas fa-sign-out-alt"></i> Log Out

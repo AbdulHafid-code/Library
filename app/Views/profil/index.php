@@ -115,7 +115,7 @@
 
 
 
-<?php if (session()->get('email') !== 'Admin@gmail.com') :?>
+<?php if (session()->get('email') !== 'redmatrixsaga@gmail.com') :?>
 <h3>Daftar Peminjaman / RIWAYAT</h3>
 <table class="table">
     <thead>
@@ -132,8 +132,16 @@
             <tr>
                 <td><?= esc($p['judul_buku']) ?></td>
                 <td><?= $p['tanggal_pinjam'] ?></td>
-                <td><?= $p['tanggal_kembali'] ?></td>
-                <td><?= ucfirst($p['status']) ?></td>
+                
+                <td>
+                    <?php if ($p['tanggal_kembali'] < date('Y-m-d H:i:s')):?>
+                        <span class="badge bg-danger text-dark">Waktunya Untuk Mengembalikan</span>
+                    <?php else:?>
+                        <?= $p['tanggal_kembali'] ?>
+                    <?php endif?>
+                </td>
+
+                <td><?= $p['status'] ?></td>
                 <td>
                     <?php if ($p['disetujui'] === 'pending'): ?>
                         <span class="badge bg-warning">Menunggu</span>

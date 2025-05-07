@@ -11,23 +11,44 @@ use App\Models\BukuModel;
 
 class ProfilController extends BaseController
 {
-    public function index($id)
-    {
+    // public function index()
+    // {
+    //     $id_user = session()->get('id_user');
+        
+    //     $pinjamModel = new PinjamModel();
+    //     $userModel = new Users();
 
-        $id_user = session()->get('id_user');
-        $pinjamModel = new PinjamModel();
+    //     $peminjaman = $pinjamModel->getPeminjamanByUser($id_user);
 
-        // daftar Riwayat peminjaman
-        $peminjaman = $pinjamModel->getPeminjamanByUser($id_user);
+    //     $data = [
+    //         'user' => $userModel->find($id_user),
+    //         'peminjaman' => $peminjaman,
+    //     ];
 
-        $user = new Users();
-        $data = [
-            'user' => $user->find($id),
-            'peminjaman' => $peminjaman,
-        ];
+    //     return view('profil/index', $data);
+    // }
 
-        return view('profil/index', $data);
-    }
+    public function index()
+{
+    return redirect()->to('/profil'); // PRG pattern
+}
+public function show()
+{
+    $id_user = session()->get('id_user');
+
+    $pinjamModel = new PinjamModel();
+    $userModel = new Users();
+
+    $peminjaman = $pinjamModel->getPeminjamanByUser($id_user);
+
+    $data = [
+        'user' => $userModel->find($id_user),
+        'peminjaman' => $peminjaman,
+    ];
+
+    return view('profil/index', $data);
+}
+
 
     public function save($id_user){
         $user = new Users();

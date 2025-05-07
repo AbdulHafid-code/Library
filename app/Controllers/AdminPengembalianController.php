@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\PinjamModel;
 use App\Models\Users;
+use App\Models\BukuModel;
 
 class AdminPengembalianController extends BaseController
 {
@@ -32,6 +33,17 @@ class AdminPengembalianController extends BaseController
     public function sudahKembali($id_pinjam){
         // dd($id_pinjam);
         $pinjam = new PinjamModel();
+        $buku = new BukuModel();
+
+        $jumlah = $pinjam->where('id_peminjam', $id_pinjam)->first();
+        $dipinjam = $buku->where('id_buku', $jumlah['buku_id'])->first();
+        $hasil = $dipinjam['dipinjam'] - $jumlah['jumlah'];
+
+        $dataDipinjam = [
+            'dipinjam' => $hasil
+        ];
+
+        $buku->update($jumlah['buku_id'], $dataDipinjam);
 
         $status = [
             'status' => 'dikembalikan'

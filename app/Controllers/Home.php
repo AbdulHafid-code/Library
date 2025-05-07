@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\BukuModel;
+use App\Models\FavoritModel;
 use App\Models\Users;
 use App\Models\KategoriModel;
 use App\Models\RatingModel;
@@ -14,6 +15,9 @@ class Home extends BaseController
         $user = new Users();
         $kategori = new KategoriModel();
         $ratingModel = new RatingModel();
+        $favoritModel = new FavoritModel();
+
+        $id_user = session()->get('id_user');
 
         $bukuList = $bukuModel->findAll(); // Loop semua buku dan ambil rata-rata ratingnya
         foreach ($bukuList as $buku) {
@@ -33,17 +37,27 @@ class Home extends BaseController
                 ->where('buku_id', $buku['id_buku'])
                 ->first();
 
+                // Ambil favorit user untuk buku ini
+                $favoritUser = $favoritModel
+                ->where('user_id', $id_user)
+                ->where('buku_id', $buku['id_buku'])
+                ->first();
+
             $buku['avg_rating'] = $avg['rating'] ?? 0;
             $buku['stok_tersedia'] = $buku['stok'] - $buku['dipinjam'];
+            $buku['favoritUser'] = $favoritUser;
+            $buku['total_favorit'] = $favoritModel->where('buku_id', $buku['id_buku'])->countAllResults();
         }
+        // dd($bukuRandom);
+        
 
-        $id_user = session()->get('id_user');
 
         $data = [
             'buku' => $bukuList,
             'bukuRandom' => $bukuRandom,
             'user' => $user->find($id_user),
             'kategori' => $kategori->findAll(),
+            'favoritUser' => $favoritUser
             // 'bukuRandom' => $bukuModel->orderBy('RAND()')->findAll(),
             // 'bukuList' => $bukuList,
         ];
@@ -106,4 +120,6 @@ class Home extends BaseController
     
         return redirect()->back()->with('success', 'Rating berhasil disimpan!');
     }
+
+    
 }

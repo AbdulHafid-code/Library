@@ -25,7 +25,7 @@ class AdminFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (session()->get('email') !== 'Admin@gmail.com') {
+        if (session()->get('email') !== 'redmatrixsaga@gmail.com') {
             return redirect()->to('/')->with('error', 'Kamu tidak punya akses ke halaman admin.');
         }
     }

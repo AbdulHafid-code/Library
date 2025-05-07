@@ -20,9 +20,16 @@
             <img alt="image" src="/foto_siswa/<?= $userLogin['foto_siswa'] ?>" class="rounded-circle mr-1">
             <div class="d-sm-none d-lg-inline-block"><?= $userLogin['nama_user'] ?></div></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <a href="/profil/<?= $userLogin['id_user'] ?>" class="dropdown-item has-icon">
-                <i class="far fa-user"></i> Profile
-              </a>
+              <!-- <a href="/profil/<?= $userLogin['id_user'] ?>" class="dropdown-item has-icon">
+                
+              </a> -->
+
+              <form action="/profil" method="post">
+                  <?= csrf_field() ?>
+                  <button type="submit"><i class="far fa-user"></i> Profile</button>
+              </form>
+
+
               <div class="dropdown-divider"></div>
               <a href="/logout" class="dropdown-item has-icon text-danger">
                 <i class="fas fa-sign-out-alt"></i> Log Out
@@ -53,7 +60,7 @@
                 <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
               </ul>
             </li> -->
-            <li><a class="nav-link" href="/peminjaman"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
+            <li><a class="nav-link" href="/peminjaman"><i class="far fa-square"></i> <span>Favorit</span></a></li>
           </ul>
 
           <div class="mt-4 mb-4 p-3 hide-sidebar-mini">

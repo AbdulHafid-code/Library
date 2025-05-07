@@ -38,6 +38,38 @@
                     ?>
                     (<?= number_format($br['avg_rating'], 1) ?>)
                 </div>
+                
+
+                <style>
+                    .favorit {
+                        font-size: 30px !important;
+                    }   
+                    input[type="radio"] {
+                        display: none;
+                    }
+                </style>
+                <?php if (empty($br['favoritUser'])): ?>
+                    <form action="/favorit/<?= $br['id_buku'] ?>" method="post">
+                        <?= csrf_field() ?>
+                        <label for="favorit">
+                            <i class="far fa-heart favorit"></i> <!-- class dipindah ke <i> -->
+                        </label>  
+                        <input type="radio" id="favorit" name="favorit" onclick="this.form.submit()">
+                    </form>
+                    <p><?= $br['total_favorit'] ?></p>
+                <?php else: ?>
+                    <form action="/favorit/hapus/<?= $br['id_buku'] ?>" method="post">
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="_method" value="DELETE"> <!-- Untuk metode delete -->
+                        <label for="unfavorit<?= $br['id_buku'] ?>">
+                            <i class="fas fa-heart favorit" style="color: red;"></i>
+                        </label>
+                        <input type="radio" id="unfavorit<?= $br['id_buku'] ?>" name="favorit" onclick="this.form.submit()" style="display:none;">
+                    </form>
+                    <p><?= $br['total_favorit'] ?></p>
+                <?php endif;?>
+
+
             </div>
         </div>
     </div>
