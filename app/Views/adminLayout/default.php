@@ -45,28 +45,28 @@
     </div>
   </div>
 
-  <!-- General JS Scripts -->
-  <script src="/assets/modules/jquery.min.js"></script>
-  <script src="/assets/modules/popper.js"></script>
-  <script src="/assets/modules/tooltip.js"></script>
-  <script src="/assets/modules/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
-  <script src="/assets/modules/moment.min.js"></script>
-  <script src="/assets/js/stisla.js"></script>
-  
-  <!-- JS Libraies -->
-  <script src="/assets/modules/simple-weather/jquery.simpleWeather.min.js"></script>
-  <script src="/assets/modules/chart.min.js"></script>
-  <script src="/assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
-  <script src="/assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-  <script src="/assets/modules/summernote/summernote-bs4.js"></script>
-  <script src="/assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+  <!-- General JS Scripts (via CDN) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="/assets/js/stisla.js"></script> <!-- Tidak tersedia di CDN publik, tetap pakai lokal -->
 
-  <!-- Page Specific JS File -->
-  <script src="/assets/js/page/index-0.js"></script>
-  
-  <!-- Template JS File -->
-  <script src="/assets/js/scripts.js"></script>
-  <script src="/assets/js/custom.js"></script>
+<!-- JS Libraries (via CDN jika tersedia) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqvmap/1.5.1/jquery.vmap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqvmap/1.5.1/maps/jquery.vmap.world.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chocolat/0.4.21/js/jquery.chocolat.min.js"></script>
+
+<!-- Page Specific JS File -->
+<script src="/assets/js/page/index-0.js"></script> <!-- tidak umum, tetap lokal -->
+
+<!-- Template JS File -->
+<script src="/assets/js/scripts.js"></script> <!-- tidak umum, tetap lokal -->
+<script src="/assets/js/custom.js"></script> <!-- tidak umum, tetap lokal -->
+
 </body>
 </html>
