@@ -5,7 +5,7 @@
 
 <section class="section">
     <div class="section-header d-flex align-items-center mb-4">
-        <a href="/" class="btn btn-primary mr-3">
+        <a href="javascript:history.back()" class="btn btn-primary mr-3">
             <i class="fas fa-arrow-left"></i>
         </a>
         <h1 class="h4 mb-0 font-weight-bold">Detail Buku</h1>

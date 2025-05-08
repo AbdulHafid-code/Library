@@ -65,4 +65,23 @@ class BukuModel extends Model
         {
             return $this->like('judul_buku', $keyword)->findAll();
         }
+
+
+
+
+        public function getBukuPopuler()
+            {
+                return $this->select('buku.*, 
+                                    COUNT(DISTINCT favorit_buku.id_favorit) as total_favorit,
+                                    AVG(DISTINCT rating_buku.rating) as avg_rating')
+                    ->join('favorit_buku', 'favorit_buku.buku_id = buku.id_buku', 'left')
+                    ->join('rating_buku', 'rating_buku.buku_id = buku.id_buku', 'left')
+                    ->groupBy('buku.id_buku')
+                    ->orderBy('dipinjam', 'DESC') // Prioritas utama: jumlah dipinjam
+                    ->orderBy('total_favorit', 'DESC') // Prioritas kedua: favorit
+                    ->orderBy('avg_rating', 'DESC') // Prioritas ketiga: rating
+                    ->limit(10) // ambil 10 teratas
+                    ->findAll();
+            }
+
 }

@@ -8,6 +8,14 @@
     </div>
 </section>
 
+<style>
+    .favorit {
+        font-size: 30px !important;
+    }   
+    input[type="radio"] {
+        display: none;
+    }
+</style>
 
 <div class="row">
     <?php foreach (array_slice($bukuRandom, 0, 8) as $br): ?>
@@ -39,23 +47,14 @@
                     (<?= number_format($br['avg_rating'], 1) ?>)
                 </div>
                 
-
-                <style>
-                    .favorit {
-                        font-size: 30px !important;
-                    }   
-                    input[type="radio"] {
-                        display: none;
-                    }
-                </style>
                 <?php if (empty($br['favoritUser'])): ?>
                     <form action="/favorit/<?= $br['id_buku'] ?>" method="post">
                         <?= csrf_field() ?>
-                        <label for="favorit">
+                        <label for="favorit<?= $br['id_buku'] ?>">
                             <i class="far fa-heart favorit"></i> <!-- class dipindah ke <i> -->
                         </label>  
-                        <input type="radio" id="favorit" name="favorit" onclick="this.form.submit()">
-                    </form>
+                        <input type="radio" id="favorit<?= $br['id_buku'] ?>" name="favorit_<?= $br['id_buku'] ?>" onclick="this.form.submit()"> 
+                       </form>
                     <p><?= $br['total_favorit'] ?></p>
                 <?php else: ?>
                     <form action="/favorit/hapus/<?= $br['id_buku'] ?>" method="post">
@@ -64,12 +63,10 @@
                         <label for="unfavorit<?= $br['id_buku'] ?>">
                             <i class="fas fa-heart favorit" style="color: red;"></i>
                         </label>
-                        <input type="radio" id="unfavorit<?= $br['id_buku'] ?>" name="favorit" onclick="this.form.submit()" style="display:none;">
+                        <input type="radio" id="unfavorit<?= $br['id_buku'] ?>" name="unfavorit_<?= $br['id_buku'] ?>" onclick="this.form.submit()">
                     </form>
                     <p><?= $br['total_favorit'] ?></p>
                 <?php endif;?>
-
-
             </div>
         </div>
     </div>
@@ -98,6 +95,67 @@
                             <div class="media-title font-weight-bold" style="font-size:30px;"><?= $b['judul_buku'] ?></div>
                             <div class="text-muted text-small">by <a href="#"><?= $b['penulis'] ?></a> <div class="bullet"></div> <?= $b['created_at'] ?></div>
                         </div>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- buku Populer -->
+<div class="row">
+    <section class="section mt-5 ml-5 mr-5 w-100" >
+        <div class="section-header">
+            <h1>Buku Populer</h1>
+        </div>
+    </section>
+
+    <div class="card ml-3 mr-3 w-100">
+        <div class="card-body ">
+            <ul class="list-unstyled list-unstyled-border">
+                <?php foreach ($populer as $p) :?>
+                    <li class="media">
+                        <a href="/detail/<?= $p['slug'] ?>">
+                            <img class="mr-3 rounded" width="70" src="sampul/<?= $p['sampul'] ?>" alt="product">
+                        </a>
+                        <div class="media-body">
+                            <div class="media-title font-weight-bold" style="font-size:30px;"><?= $p['judul_buku'] ?></div>
+                            <div class="text-muted text-small">by <a href="#"><?= $p['penulis'] ?></a> <div class="bullet"></div> <?= $p['created_at'] ?></div>
+                        </div>
+                    </li>
+                    <li>
+                        <?php if (empty($p['favoritUser'])) :?>
+                            <form action="/favorit/<?= $p['id_buku'] ?>" method="post">
+                                <?= csrf_field() ?>
+                                <label for="favorit<?= $p['id_buku'] ?>">
+                                    <i class="far fa-heart favorit"></i> <!-- class dipindah ke <i> -->
+                                </label>
+                                <input type="radio" name="favorit<?= $p['id_buku'] ?>" id="favorit<?= $p['id_buku'] ?>" onclick="this.form.submit()">
+                            </form>
+                        <?php else:?>
+                            <form action="/favorit/hapus/<?= $p['id_buku'] ?>" method="post">
+                                <?= csrf_field() ?>
+                                <input type="hidden" name="_method" value="DELETE">
+                                <label for="unfollow<?= $p['id_buku'] ?>">
+                                    <i class="fas fa-heart favorit" style="color: red;"></i>
+                                </label>
+                                <input type="radio" name="unfavorit<?= $p['id_buku'] ?>" id="unfavorit<?= $p['id_buku'] ?>" onclick="this.form.submit()">
+                            </form>
+                        <?php endif;?>
+                        <p><?= $p['total_favorit'] ?></p>
+
+                        <?php 
+                        $rating = floor($p['avg_rating']);
+                        for ($i = 1; $i <= 5; $i++) {
+                            if ($i <= $rating) {
+                                echo '<span style="color: gold; font-size: 1.2rem;">★</span>';
+                            } else {
+                                echo '<span style="color: lightgray; font-size: 1.2rem;">★</span>';
+                            }
+                        }
+                        ?>
+                        (<?= number_format($p['avg_rating'], 1) ?>)
                     </li>
                 <?php endforeach; ?>
             </ul>

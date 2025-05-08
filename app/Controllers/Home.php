@@ -39,27 +39,41 @@ class Home extends BaseController
 
                 // Ambil favorit user untuk buku ini
                 $favoritUser = $favoritModel
-                ->where('user_id', $id_user)
-                ->where('buku_id', $buku['id_buku'])
-                ->first();
+                                ->where('user_id', $id_user)
+                                ->where('buku_id', $buku['id_buku'])
+                                ->first();
 
             $buku['avg_rating'] = $avg['rating'] ?? 0;
             $buku['stok_tersedia'] = $buku['stok'] - $buku['dipinjam'];
             $buku['favoritUser'] = $favoritUser;
             $buku['total_favorit'] = $favoritModel->where('buku_id', $buku['id_buku'])->countAllResults();
         }
-        // dd($bukuRandom);
-        
 
+
+        $bukuPopuler = $bukuModel->getBukuPopuler();
+        foreach ($bukuPopuler as &$buku) {
+            $avg = $ratingModel 
+                    ->selectAvg('rating')
+                    ->where('buku_id', $buku['id_buku'])
+                    ->first();
+ 
+            $favorituser = $favoritModel
+                            ->where('user_id', $id_user)
+                            ->where('buku_id', $buku['id_buku'])
+                            ->first();
+
+            $buku['avg_rating'] = $avg['rating'] ?? 0 ;
+            $buku['favoritUser'] = $favorituser;
+            $buku['total_favorit'] = $favoritModel->where('buku_id', $buku['id_buku'])->countAllResults();
+        }
 
         $data = [
             'buku' => $bukuList,
             'bukuRandom' => $bukuRandom,
             'user' => $user->find($id_user),
             'kategori' => $kategori->findAll(),
-            'favoritUser' => $favoritUser
-            // 'bukuRandom' => $bukuModel->orderBy('RAND()')->findAll(),
-            // 'bukuList' => $bukuList,
+            'favoritUser' => $favoritUser,
+            'populer' =>$bukuPopuler,
         ];
 
         return view('pages/home', $data);

@@ -61,6 +61,7 @@ $routes->group('/', ['filter' => 'user'], function($routes){
     $routes->get('/detail/(:any)', 'Home::detail/$1');
     $routes->post('/rating/(:any)', 'Home::rating/$1');
 
+    $routes->get('/favorit', 'FavoritController::index');
     $routes->post('/favorit/(:num)', 'FavoritController::tambahFavorit/$1');
     $routes->delete('/favorit/hapus/(:num)', 'FavoritController::hapusFavorit/$1');
 

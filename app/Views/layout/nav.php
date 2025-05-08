@@ -60,7 +60,7 @@
                 <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
               </ul>
             </li> -->
-            <li><a class="nav-link" href="/peminjaman"><i class="far fa-square"></i> <span>Favorit</span></a></li>
+            <li><a class="nav-link" href="/favorit"><i class="far fa-square"></i> <span>Favorit</span></a></li>
           </ul>
 
           <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
