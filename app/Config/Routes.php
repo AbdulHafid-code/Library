@@ -51,6 +51,15 @@ $routes->group('admin',['filter' => 'admin'], function($routes) {
     $routes->post('stok/kurangi/(:any)', 'AdminStokController::kurangi/$1');
 
 
+    // Status User
+    $routes->get('status', 'AdminStatusController::index');
+    $routes->post('status/blok/(:num)', 'AdminStatusController::blok/$1');
+    $routes->post('status/buka/(:num)', 'AdminStatusController::buka/$1');
+
+    // Laporan
+    $routes->get('laporan', 'AdminLaporanController::index');
+
+
 });
 
 

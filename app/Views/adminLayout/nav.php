@@ -54,6 +54,10 @@
             <li class="<?= ($uri->getSegment(2) == 'pengembalian') ? 'active' : '' ?>"><a class="nav-link" href="/admin/pengembalian"><i class="far fa-square"></i><span>Pengembalian</span></a></li>
 
             <li class="<?= ($uri->getSegment(2) == 'stok') ? 'active' : '' ?>"><a class="nav-link" href="/admin/stok"><i class="far fa-square"></i><span>Stok</span></a></li>
+
+            <li class="<?= ($uri->getSegment(2) == 'status') ? 'active' : '' ?>"><a class="nav-link" href="/admin/status"><i class="far fa-square"></i><span>Status User</span></a></li>
+            
+            <li class="<?= ($uri->getSegment(2) == 'laporan') ? 'active' : '' ?>"><a class="nav-link" href="/admin/laporan"><i class="far fa-square"></i><span>Laporan</span></a></li>
           </ul>
           <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
             <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
