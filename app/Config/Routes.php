@@ -58,6 +58,8 @@ $routes->group('admin',['filter' => 'admin'], function($routes) {
 
     // Laporan
     $routes->get('laporan', 'AdminLaporanController::index');
+    $routes->get('laporan/exportpdf', 'AdminLaporanController::exportpdf');
+
 
 
 });
