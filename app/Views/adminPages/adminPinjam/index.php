@@ -78,6 +78,7 @@
         </div>
 
         <canvas id="signature-pad"></canvas>
+        <canvas class="bg-danger" ></canvas>
 
         <div class="button-container">
             <button id="clear" class="btn-clear btn btn-danger">Reset</button>
